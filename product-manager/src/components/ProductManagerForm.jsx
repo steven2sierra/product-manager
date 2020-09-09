@@ -37,7 +37,7 @@ export default () => {
                     <label>Description</label>
                     <input type="text" onChange = {e => setDescription(e.target.value)}/>
                 </p>
-                <input type="submit" value="Submit Product"/>
+                <input type="submit" value="Create"/>
             </form>
         </div>
     );
