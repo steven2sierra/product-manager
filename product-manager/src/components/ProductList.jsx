@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 // Link
 import { Link } from '@reach/router';
 import axios from 'axios';
+// import DeleteButton
+import DeleteButton from './DeleteButton';
 
 
 export default props => {
@@ -14,7 +16,12 @@ export default props => {
         textDecoration: "none",
         color: "black"
     }
-    // delete product
+    // remove from DOM
+    const removeFromDom = ID => {
+        setProducts(products.filter(product => product._id  !== ID ))
+    }
+    // delete product, before
+    /*
     const { removeFromDom } = props;
     const deleteProduct = (ID) => {
         axios.delete(`http://localhost:8000/api/products/delete/${ID}`)
@@ -22,7 +29,8 @@ export default props => {
                 removeFromDom(ID)
             })
     }
-    // useEffect
+    */
+    // useEffect, get from API
     useEffect(() => {
         axios.get('http://localhost:8000/api/products')
             .then(res => setProducts(res.data) )
@@ -36,9 +44,9 @@ export default props => {
                     <div key={idx}>
                         <Link style={styleA} to={`/products/${item._id}`} >{item.title}</Link>
                         <br/>
-                        <button onClick = {e => {deleteProduct(item._id)}}>
-                            DELETE
-                        </button>
+                        <Link to={`/products/update/${item._id}`} >EDIT</Link>
+                        <br/>
+                        <DeleteButton ID={item._id} goodCall={() => removeFromDom(item._id) } />
                     </div>
                 );
             })}

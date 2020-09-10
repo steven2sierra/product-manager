@@ -18,11 +18,18 @@ export default () => {
     // removeFromDom
     const removeFromDom = ID => {
         setProducts(products.filter(product => product._id !== ID));
-    } 
+    }
+    // const createProduct, creates a product
+    const createProduct = product => {
+        axios.post(`http://localhost:8000/api/products/new`, product)
+            .then(res => {
+                setProducts([...products,res.data]);
+            })
+    }
     // return ProductManagerForm
     return(
         <div>
-            <ProductManagerForm/>
+            <ProductManagerForm onSubmitProp={createProduct} initialTitle="" initialPrice="" initialDescription="" />
             <hr/> {/* thematic break */}
             <h2>All Products</h2>
             {
