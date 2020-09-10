@@ -15,6 +15,10 @@ export default () => {
                 setLoaded(true);
             });
     }, [])
+    // removeFromDom
+    const removeFromDom = ID => {
+        setProducts(products.filter(product => product._id !== ID));
+    } 
     // return ProductManagerForm
     return(
         <div>
@@ -22,7 +26,7 @@ export default () => {
             <hr/> {/* thematic break */}
             <h2>All Products</h2>
             {
-                loaded && <ProductList products={products}/>
+                loaded && <ProductList products={products} removeFromDom= { removeFromDom }/>
             }
         </div>
     );

@@ -14,6 +14,14 @@ export default props => {
         textDecoration: "none",
         color: "black"
     }
+    // delete product
+    const { removeFromDom } = props;
+    const deleteProduct = (ID) => {
+        axios.delete(`http://localhost:8000/api/products/delete/${ID}`)
+            .then(res => {
+                removeFromDom(ID)
+            })
+    }
     // useEffect
     useEffect(() => {
         axios.get('http://localhost:8000/api/products')
@@ -27,6 +35,10 @@ export default props => {
                 return(
                     <div key={idx}>
                         <Link style={styleA} to={`/products/${item._id}`} >{item.title}</Link>
+                        <br/>
+                        <button onClick = {e => {deleteProduct(item._id)}}>
+                            DELETE
+                        </button>
                     </div>
                 );
             })}

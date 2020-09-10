@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from '@reach/router';
 
 export default props => {
     // product, setProduct
@@ -15,14 +16,21 @@ export default props => {
             .catch(err => console.log(err));
             // console.log(res);
     }, [props._id]);
+    // style Link
+    const styleLink = {
+        textDecoration: "none",
+        color: "black"
+    }
     // return
     return (
         <div>
             <div>
-                <p>Test...</p>
-                <h2>Title:{product.title}</h2>
-                <p>Price:{product.price}</p>
-                <p>Description:{product.description}</p>
+                <h2>Title: {product.title}</h2>
+                <p>Price: {product.price}</p>
+                <p>Description: {product.description}</p>
+                <button>
+                    <Link style={styleLink} to={`/products/update/${props._id}`} >EDIT</Link>
+                </button>
             </div>
         </div>
     );
