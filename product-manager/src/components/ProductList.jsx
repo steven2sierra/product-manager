@@ -35,7 +35,7 @@ export default props => {
         axios.get('http://localhost:8000/api/products')
             .then(res => setProducts(res.data) )
             .catch(err => console.log(err));
-    });
+    },[]);
     // return
     return (
         <div>
